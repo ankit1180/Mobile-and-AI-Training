@@ -3,7 +3,7 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ProductScreen from '../screens/ProductScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AddToCartScreen from '../screens/AddToCartScreen';
+import AddToCartScreen from '../screens/AddToCartScreen.tsx';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,9 +22,9 @@ const BottomTabs = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <Icon
-              name="home" // FontAwesome icon name
-              size={24} // icon size
-              color={focused ? '#000' : '#ccc'} // active/inactive color
+              name="home"
+              size={24}
+              color={focused ? '#000' : '#ccc'} 
             />
           ),
         }}
