@@ -55,6 +55,10 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
+
+      console.log('state in add to cart ====>>>> ',state);
+      console.log('action in add to cart ====>>>> ',action);
+
       const newItem = action.payload;
       console.log('newItem =====>>>>> ',newItem)
       const existingItem = state.cartItems.find(item => item.id === newItem.id);
@@ -79,11 +83,49 @@ export const counterSlice = createSlice({
       state.totalQuantity = state.cartItems.reduce((total, item) => total + item.quantity, 0);
       state.totalAmount = state.cartItems.reduce((total, item) => total + item.totalPrice, 0);
     },
+
+     incrementQty: (state, action) => {
+
+      console.log('state in increment ====>>>> ',state);
+      console.log('action in increment ====>>>> ',action);
+      
+    const item = state.cartItems.find(i => i.id === action.payload);
+    if (item) {
+      item.quantity += 1;
+      item.totalPrice = item.quantity * item.price;
+      state.totalQuantity += 1;
+      state.totalAmount += item.price;
+    }
+  },
+
+  decrementQty: (state, action) => {
+
+    console.log('state in decrementQty ====>>>> ',state);
+      console.log('action in decrementQty ====>>>> ',action);
+    const itemIndex = state.cartItems.findIndex(i => i.id === action.payload);
+
+    console.log('itemIndex in decrement ====>>>> ',itemIndex);
+    
+    if (itemIndex !== -1) {
+      const item = state.cartItems[itemIndex];
+
+      item.quantity -= 1;
+      state.totalQuantity -= 1;
+      state.totalAmount -= item.price;
+
+      if (item.quantity === 0) {
+        state.cartItems.splice(itemIndex, 1);
+      } else {
+        item.totalPrice = item.quantity * item.price;
+      }
+    }
+  }
+
     
    
   },
 });
 
-export const { addToCart} = counterSlice.actions;
+export const { addToCart, incrementQty, decrementQty} = counterSlice.actions;
 
 export default counterSlice.reducer;
