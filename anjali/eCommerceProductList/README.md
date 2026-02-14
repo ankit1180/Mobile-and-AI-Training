@@ -1,97 +1,109 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# eCommerce Product List
 
-# Getting Started
+A React Native mobile application for browsing and managing an eCommerce product catalog with features like product listing, detailed product views, quantity selection, and a shopping cart system.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Overview
 
-## Step 1: Start Metro
+eCommerceProductList is a mobile shopping application built with React Native. It allows users to browse products, view detailed information, select quantities, and manage a shopping cart with persistent storage.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+**Key Features:**
 
-```sh
-# Using npm
-npm start
+- Browse product listings with images and details
+- View detailed product information
+- Add/remove products from cart
+- Adjust product quantities in cart
+- Persistent cart storage using AsyncStorage
+- Navigation between screens (Home, Product Details, Cart)
+- Redux state management
 
-# OR using Yarn
-yarn start
+### 1. Clone or Extract the Project
+
+```bash
+cd eCommerceProductList
 ```
 
-## Step 2: Build and run your app
+### 2. Install Dependencies
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Using npm:
+
+```bash
+npm install
+```
+
+## Project Structure
+
+```
+eCommerceProductList/
+├── src/
+│   ├── assets/
+│   │   └── css/
+│   │       ├── headerStyle.js
+│   │       ├── productDetailScreenStyle.js
+│   │       ├── productdetailsStyle.js
+│   │       ├── productstyle.js
+│   │       └── quantitystyle.js
+│   ├── components/
+│   │   ├── Header.js
+│   │   ├── Product.js
+│   │   ├── ProductDetails.js
+│   │   ├── ProductCartDetails.js
+│   │   ├── QuantitySelector.js
+│   │   └── redux/
+│   │       ├── actions.js
+│   │       ├── constants.js
+│   │       ├── reducer.js
+│   │       ├── rootReducer.js
+│   │       └── store.js
+│   └── Data/
+│       └── product.js
+├── App.tsx
+├── index.js
+└── README.md
+```
+
+#### **Platform-Specific Directories**
+
+## Running the App
 
 ### Android
 
-```sh
-# Using npm
-npm run android
+Start the Metro bundler:
 
-# OR using Yarn
-yarn android
+```bash
+npm start
 ```
 
-### iOS
+In a new terminal, run:
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```bash
+npx react-native run-android
 ```
 
-Then, and every time you update your native dependencies, run:
+## Project Setup Details
 
-```sh
-bundle exec pod install
-```
+### State Management
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+The app uses **Redux** with **redux-persist** for state management:
 
-```sh
-# Using npm
-npm run ios
+- **Redux Store:** Manages cart state globally
+- **Redux Persist:** Automatically saves cart state to AsyncStorage
+- **AsyncStorage:** Provides persistent storage on device
 
-# OR using Yarn
-yarn ios
-```
+### Navigation
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+The app uses **React Navigation** with **Native Stack Navigator**:
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+- **Product Screen (Home):** Displays list of all products
+- **ProductDetails Screen:** Shows detailed information about a selected product
+- **ProductCartDetails Screen:** Manages and displays shopping cart items
 
-## Step 3: Modify your app
+### Storage
 
-Now that you have successfully run the app, let's make changes!
+- **AsyncStorage:** Stores cart items persistently across app sessions
+- **Redux Persist:** Automatically syncs Redux state with AsyncStorage
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Developer
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Anjali Kashyap (React-Native Developer)

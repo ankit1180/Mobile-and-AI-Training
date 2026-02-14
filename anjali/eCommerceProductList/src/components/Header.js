@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import { styles } from '../assets/css/headerStyle';
 
 export default function Header() {
   // State to show the count of items in the cart
@@ -31,26 +32,3 @@ export default function Header() {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    marginRight: 16,
-  },
-  // Cart icon style
-  cartImage: {
-    width: 30,
-    height: 30,
-    marginLeft: 150,
-    marginTop: 4,
-    borderRadius: 4,
-  },
-  cartCountText: {
-    position: 'absolute',
-    right: 0,
-    color: 'blue',
-    fontSize: 10,
-    marginLeft: 9,
-    fontWeight: 'bold',
-  },
-});
