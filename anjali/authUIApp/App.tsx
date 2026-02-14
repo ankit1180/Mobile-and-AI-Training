@@ -1,6 +1,4 @@
-import React from 'react';
-import LoginPage from './components/LoginPage';
-
+import LoginPage from './src/components/LoginPage';
 function App() {
   return <LoginPage />;
 }
