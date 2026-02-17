@@ -1,4 +1,4 @@
-import { Alert, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react';
 //import { SafeAreaView } from 'react-native-safe-area-context'
 //import { FlatList } from 'react-native/types_generated/index'
@@ -7,8 +7,16 @@ import products from '../../products.json';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart,incrementQty, decrementQty } from '../redux/slice/counterSlice';
 import {styles} from '../asset/css/ProductScreenCss.js'
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../utils/types/navigation.js';
 
 const ProductScreen = () => {
+ // const navigation = useNavigation();
+
+ const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+
 
   const cartItems = useSelector(state => state.cart.cartItems);
 
@@ -30,49 +38,22 @@ const ProductScreen = () => {
   return item ? item.quantity : 0;
 };
 
-    
-    
-     /*
-    const renderProductItem = ({item}) => {
-
-      return(
-        <View style={styles.productCard}>
-            <Image 
-        source={{ uri: item.image }} 
-        style={styles.productImage}
-        resizeMode="cover"
-      />
-      
-      <View style={styles.productInfo}>
-        <Text style={styles.productName} numberOfLines={2}>
-          {item.name}
-        </Text>
-        
-        <View style={styles.categoryContainer}>
-          <Text style={styles.categoryText}>{item.category}</Text>
-        </View>
-        
-        <Text style={styles.productPrice}>${item.price.toFixed(2)}</Text>
-        
-        <TouchableOpacity 
-          style={styles.addButton}
-          onPress={() => handleAddToCart(item)}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.addButtonText}>Add to Cart</Text>
-        </TouchableOpacity>
-      </View>
-        </View>
-      )
-        
-    } */
+  
 
       const renderProductItem = ({ item }) => {
 
   const quantity = getItemQuantity(item.id);
 
   return (
-    <View style={styles.productCard}>
+     
+
+       <View style={styles.productCard}>
+        <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() => {
+         navigation.navigate('ProductsDetail', { product: item })
+      }}
+    >
       <Image
         source={{ uri: item.image }}
         style={styles.productImage}
@@ -118,7 +99,10 @@ const ProductScreen = () => {
         )}
 
       </View>
+       </TouchableOpacity>
     </View>
+   
+   
   );
 };
 

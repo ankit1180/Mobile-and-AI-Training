@@ -159,6 +159,41 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+
+  backBtn: {
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    zIndex: 10,
+    backgroundColor: '#fff',
+    padding: 8,
+    borderRadius: 20,
+    elevation: 4,
+  },
+  qtyContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  backgroundColor: '#eee',
+  borderRadius: 10,
+  paddingHorizontal: 10,
+  paddingVertical: 4,
+},
+
+qtyButton: {
+  paddingHorizontal: 10,
+},
+
+qtyText: {
+  fontSize: 20,
+  fontWeight: 'bold',
+},
+
+qtyNumber: {
+  fontSize: 16,
+  fontWeight: 'bold',
+  marginHorizontal: 6,
+},
+
 });
 
 //export default AddToCartScreen;

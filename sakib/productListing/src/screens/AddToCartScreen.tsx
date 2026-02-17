@@ -1,11 +1,6 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-} from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
-import {  useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 /*
 import {
@@ -15,23 +10,71 @@ import {
   clearCart,
 } from '../redux/slice/counterSlice'; */
 
-  import {styles}  from '../asset/css/AddToCartScreenCss.js'
+import { styles } from '../asset/css/AddToCartScreenCss.js';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../utils/types/navigation.js';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { decrementQty, incrementQty } from '../redux/slice/counterSlice.js';
 
 const AddToCartScreen = () => {
-//  const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  //const navigation = useNavigation()
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { cartItems, totalQuantity, totalAmount } = useSelector(
     state => state.cart,
   );
 
+  console.log('cartItems in cart screen ====>>>> ', cartItems);
+  console.log('totalQuantity in cart screen ====>>>> ', totalQuantity);
+  console.log('totalAmount in cart screen ====>>>> ', totalAmount);
+
+
   const renderCartItem = ({ item }) => (
     <View style={styles.cartItem}>
+      <TouchableOpacity
+        style={styles.backBtn}
+        onPress={() => navigation.goBack()}
+      >
+        <Ionicons name="arrow-back" size={22} color="#000" />
+      </TouchableOpacity>
+
       <Image source={{ uri: item.image }} style={styles.cartItemImage} />
 
-      <View style={styles.cartItemInfo}>
-        <Text style={styles.cartItemName} numberOfLines={2}>
-          {item.name}
-        </Text>
-        <Text style={styles.cartItemPrice}>${item.price.toFixed(2)}</Text>
+      <TouchableOpacity
+        style={{ flex: 1 }}
+        activeOpacity={0.8}
+        onPress={() => navigation.navigate('ProductsDetail', { product: item })}
+      >
+        <View style={styles.cartItemInfo}>
+          <Text style={styles.cartItemName} numberOfLines={2}>
+            {item.name}
+          </Text>
+
+          <Text style={styles.cartItemPrice}>${item.price.toFixed(2)}</Text>
+        </View>
+      </TouchableOpacity>
+
+      <View style={styles.qtyContainer}>
+        <TouchableOpacity
+          style={styles.qtyButton}
+          onPress={() => dispatch(decrementQty(item.id))}
+        >
+          <Text style={styles.qtyText}>−</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.qtyNumber}>{item.quantity}</Text>
+
+        <TouchableOpacity
+          style={styles.qtyButton}
+          onPress={() => dispatch(incrementQty(item.id))}
+        >
+          <Text style={styles.qtyText}>+</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -69,7 +112,5 @@ const AddToCartScreen = () => {
     </View>
   );
 };
-
-
 
 export default AddToCartScreen;
