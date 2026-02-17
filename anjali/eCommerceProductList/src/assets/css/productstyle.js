@@ -4,14 +4,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f2f2f2',
   },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#fff',
-    elevation: 2,
-  },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -56,19 +48,6 @@ export const styles = StyleSheet.create({
     color: '#007bff',
     textAlign: 'left',
   },
-  cartButton: {
-    backgroundColor: '#007bff',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-    width: '100%',
-    alignItems: 'center',
-  },
-  cartButtonText: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 14,
-  },
   centerEmpty: {
     flex: 1,
     justifyContent: 'center',
@@ -90,5 +69,6 @@ export const styles = StyleSheet.create({
   },
   toastText: {
     color: '#007bff',
+    fontWeight: 'bold',
   },
 });

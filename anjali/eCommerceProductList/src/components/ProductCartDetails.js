@@ -8,34 +8,31 @@ import {
 } from 'react-native';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  removeFromCart,
-  incrementQuantity,
-  decrementQuantity,
-} from './redux/actions';
 import QuantitySelector from './QuantitySelector';
-import { styles } from '../assets/css/productdetailsStyle';
+import { styles } from '../assets/css/productCartStyle';
+import { removeFromCart } from './redux/actions';
 
-export default function ProductCartDetails() {
+export default function ProductCartDetails({ route, navigation }) {
   const cartData = useSelector(state => state.cart.cartItems);
   const dispatch = useDispatch();
-
-  const handleIncrement = item => {
-    dispatch(incrementQuantity(item));
-  };
-
-  const handleDecrement = item => {
-    dispatch(decrementQuantity(item));
-  };
-
-  const handleRemove = item => {
-    dispatch(removeFromCart(item));
-  };
 
   const totalPrice = cartData.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
+
+  //navigate on productDetails
+  const handleProductPress = item => {
+    navigation.navigate('ProductDetails', {
+      product: item,
+      title: 'Product Details',
+    });
+  };
+
+  //remove cart totally
+  const handleRemove = item => {
+    dispatch(removeFromCart(item));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,18 +48,19 @@ export default function ProductCartDetails() {
             contentContainerStyle={styles.listContent}
             renderItem={({ item }) => (
               <View style={styles.card}>
-                <Image source={{ uri: item.image }} style={styles.image} />
+                <TouchableOpacity
+                  onPress={() => handleProductPress(item)}
+                  activeOpacity={0.9}
+                >
+                  <Image source={{ uri: item.image }} style={styles.image} />
+                </TouchableOpacity>
                 <View style={styles.details}>
                   <Text style={styles.productName} numberOfLines={1}>
                     {item.name}
                   </Text>
                   <Text style={styles.productPrice}>₹ {item.price}</Text>
                   <View style={styles.quantityContainer}>
-                    <QuantitySelector
-                      quantity={item.quantity}
-                      onIncrement={() => handleIncrement(item)}
-                      onDecrement={() => handleDecrement(item)}
-                    />
+                    <QuantitySelector product={item} />
                   </View>
                 </View>
                 <TouchableOpacity

@@ -8,14 +8,19 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from './redux/actions';
-import { styles } from '../assets/css/productDetailScreenStyle';
+import { styles } from '../assets/css/productScreenStyle';
+import QuantitySelector from './QuantitySelector';
 
 const ProductDetails = ({ route, navigation }) => {
   const { product } = route.params;
   const dispatch = useDispatch();
   const [message, setMessage] = useState('');
+
+  //get the cart data
+  const cartData = useSelector(state => state.cart.cartItems);
+  const cartItem = cartData.find(item => item.id === product.id);
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
@@ -39,11 +44,26 @@ const ProductDetails = ({ route, navigation }) => {
           </Text>
           {/* Action Buttons */}
           <View style={styles.actionContainer}>
+            {/* Add product from the product details page */}
+            {cartItem ? (
+              <View style={{ marginBottom: 15 }}>
+                <QuantitySelector product={product} />
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={styles.addToCartButton}
+                onPress={handleAddToCart}
+              >
+                <Text style={styles.addToCartText}>Add to Cart</Text>
+              </TouchableOpacity>
+            )}
+
+            {/* Go To Cart */}
             <TouchableOpacity
               style={styles.addToCartButton}
-              onPress={handleAddToCart}
+              onPress={() => navigation.navigate('Cart')}
             >
-              <Text style={styles.addToCartText}>Add to Cart</Text>
+              <Text style={styles.addToCartText}>Go To Cart</Text>
             </TouchableOpacity>
           </View>
           {message ? <Text style={styles.message}>{message}</Text> : null}

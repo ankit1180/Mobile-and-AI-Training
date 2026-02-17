@@ -8,26 +8,22 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { data } from '../Data/product';
-import Header from './Header';
-import { useDispatch } from 'react-redux';
-import { addToCart } from './redux/actions';
-import { useNavigation } from '@react-navigation/native';
 import { styles } from '../assets/css/productstyle';
+import QuantitySelector from './QuantitySelector';
 
-function Product() {
+function Product({ route, navigation }) {
   const [message, setMessage] = useState('');
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-
-  const handleAddToCart = item => {
-    dispatch(addToCart(item));
+  //productDetails routes
+  const handleProductPress = item => {
+    navigation.navigate('ProductDetails', {
+      product: item,
+      title: 'Product Details',
+    });
+  };
+  //show message
+  const showToast = () => {
     setMessage('Product added successfully');
     setTimeout(() => setMessage(''), 1000);
-  };
-
-  //productDetails
-  const handleProductPress = item => {
-    navigation.navigate('ProductDetails', { product: item });
   };
 
   const renderProduct = ({ item }) => {
@@ -44,23 +40,15 @@ function Product() {
           </Text>
           <Text style={styles.productPrice}>₹ {item.price}</Text>
         </View>
-        <TouchableOpacity
-          style={styles.cartButton}
-          onPress={() => handleAddToCart(item)}
-        >
-          <Text style={styles.cartButtonText}>Add To Cart</Text>
-        </TouchableOpacity>
+        <View pointerEvents="box-none">
+          <QuantitySelector product={item} onAdd={showToast} />
+        </View>
       </TouchableOpacity>
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>My Product</Text>
-        <Header />
-      </View>
-
       <FlatList
         data={data}
         renderItem={renderProduct}

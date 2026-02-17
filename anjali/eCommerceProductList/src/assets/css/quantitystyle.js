@@ -24,4 +24,17 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     color: '#333',
   },
+  addButton: {
+    backgroundColor: '#007bff',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    width: '100%',
+    alignItems: 'center',
+  },
+  cartButtonText: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 14,
+  },
 });

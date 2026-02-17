@@ -19,16 +19,16 @@ export function removeFromCart(item) {
   };
 }
 
-export function incrementQuantity(item) {
+export function incrementQuantity(id) {
   return {
     type: INCREMENT_QUANTITY,
-    data: item,
+    data: id,
   };
 }
 
-export function decrementQuantity(item) {
+export function decrementQuantity(id) {
   return {
     type: DECREMENT_QUANTITY,
-    data: item,
+    data: id,
   };
 }

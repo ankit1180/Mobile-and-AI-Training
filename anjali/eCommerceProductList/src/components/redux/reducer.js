@@ -33,9 +33,7 @@ const reducer = createReducer(initialState, builder => {
 
   //increment to cart
   builder.addCase(INCREMENT_QUANTITY, (state, action) => {
-    const itemPresent = state.cartItems.find(
-      item => item.id === action.data.id,
-    );
+    const itemPresent = state.cartItems.find(item => item.id === action.data);
     if (itemPresent) {
       itemPresent.quantity++;
     }
@@ -43,13 +41,11 @@ const reducer = createReducer(initialState, builder => {
 
   //decrement to cart
   builder.addCase(DECREMENT_QUANTITY, (state, action) => {
-    const itemPresent = state.cartItems.find(
-      item => item.id === action.data.id,
-    );
+    const itemPresent = state.cartItems.find(item => item.id === action.data);
     if (itemPresent) {
       if (itemPresent.quantity === 1) {
         state.cartItems = state.cartItems.filter(
-          item => item.id !== action.data.id,
+          item => item.id !== action.data,
         );
       } else {
         itemPresent.quantity--;
