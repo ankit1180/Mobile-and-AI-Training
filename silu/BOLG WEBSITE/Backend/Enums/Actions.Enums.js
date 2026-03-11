@@ -1,0 +1,13 @@
+const Actions = Object.freeze({
+    CREATE_BLOG: "CREATE_BLOG",
+    VIEW_OWN_BLOG: "VIEW_OWN_BLOG",
+    VIEW_ALL_BLOGS: "VIEW_ALL_BLOGS",
+    EDIT_OWN_BLOG: "EDIT_OWN_BLOG",
+    EDIT_ANY_BLOG: "EDIT_ANY_BLOG",
+    DELETE_OWN_BLOG: "DELETE_OWN_BLOG",
+    DELETE_ANY_BLOG: "DELETE_ANY_BLOG",
+    VIEW_USERS: "VIEW_USERS",
+});
+
+export default Actions;
+
