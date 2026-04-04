@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabs from './BottomTabs';
 import ProductScreen from '../screens/ProductScreen';
+import ProductDetailsScreen from '../screens/ProductDetailsScreen';
 
 
  const Stack = createNativeStackNavigator()
@@ -15,7 +16,17 @@ const Routes = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
 
     <Stack.Screen name="Main" component={BottomTabs} />
-    <Stack.Screen name="Products" component={ProductScreen} />
+    <Stack.Screen 
+    name="Products" 
+    component={ProductScreen}
+    
+    />
+    <Stack.Screen name="ProductsDetail" component={ProductDetailsScreen} 
+     options={{
+    title: 'Product Details',
+    //headerBackTitleVisible: true,
+  }} 
+    />
 
     </Stack.Navigator>
 
